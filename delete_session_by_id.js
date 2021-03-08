@@ -1,5 +1,11 @@
+const connect = require('./mongo/connect.js')
 
+module.exports = async function deleteSessionById(id){
+    console.log(id);
 
-module.exports = function deleteSessionById(adminId){
-    return Promise.resolve();
+    if (!id) return Promise.resolve();
+    db = await connect();
+    return db.collection('adminSessions').deleteOne({
+        adminId: id //mas detalle sobre esto
+    })
 }
