@@ -1,5 +1,5 @@
 describe('deleteAdminSession', function () {
-  var fn = require('../../app/delete_admin_session.js');
+  var fn = require('../../data/delete_admin_session.js');
 
   function deleteAdminSessionDouble(params) {
     deleteAdminSessionDouble.params = params;

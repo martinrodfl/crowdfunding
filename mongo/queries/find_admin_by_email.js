@@ -1,4 +1,4 @@
-const connect = require('./mongo/connect.js');
+const connect = require('../connect.js');
 
 module.exports = async function findAdminByEmail(email) {
   var client = await connect();

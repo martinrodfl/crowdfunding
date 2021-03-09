@@ -1,4 +1,4 @@
-const connect = require('./mongo/connect.js');
+const connect = require('../connect.js');
 
 module.exports = async function saveSessionForAdmin(adminId) {
   if (!adminId) return Promise.resolve();

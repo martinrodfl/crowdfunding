@@ -1,5 +1,5 @@
 describe('findAdminSession', function () {
-  var fn = require('../../app/find_admin_session.js');
+  var fn = require('../../data/find_admin_session.js');
 
   function databaseFindAdminSessionDoubleSuccess(params) {
     databaseFindAdminSessionDoubleSuccess.params = params;

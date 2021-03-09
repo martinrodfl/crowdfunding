@@ -1,5 +1,5 @@
 describe('removeAdminSession', function () {
-  var fn = require('../../app/remove_admin_session.js');
+  var fn = require('../../usecases/remove_admin_session.js');
 
   function findAdminSessionDoubleNull() {
     return null;
