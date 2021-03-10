@@ -13,7 +13,7 @@ module.exports = function request(config) {
         response.body.push(data.toString());
       })
       response.on('end', function () {
-        response.body = JSON.parse(response.body.join(''));
+        response.body = response.body.join('');
         resolve(response);
       });
     });

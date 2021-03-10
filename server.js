@@ -1,4 +1,6 @@
 module.exports = function server(override) {
+  var path = require('path');
+
   var deps = {
     findAdminSession: require('./mongo/queries/find_admin_session.js'),
     deleteAdminSession: require('./mongo/queries/delete_admin_session.js'),
@@ -10,5 +12,7 @@ module.exports = function server(override) {
     '/remove_admin_session': require('./app/usecases/remove_admin_session.js')(deps),
   };
 
-  return require('./http/create_server.js')(routes);
+  var server = require('./http/create_server.js')(routes);
+
+  return server;
 };
