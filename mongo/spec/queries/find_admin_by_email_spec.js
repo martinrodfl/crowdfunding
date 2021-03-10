@@ -1,7 +1,7 @@
-var connect = require('../mongo/connect.js');
+var connect = require('../../connect.js');
 
 describe('findAdminByEmail', function () {
-  var fn = require('../find_admin_by_email.js');
+  var fn = require('../../queries/find_admin_by_email.js');
   var admin;
 
   beforeAll(function (done) {

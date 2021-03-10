@@ -1,7 +1,7 @@
-const connect = require('../mongo/connect.js');
+const connect = require('../../connect.js');
 
 describe('saveSessionForAdmin', function () {
-  var fn = require('../save_session_for_admin.js');
+  var fn = require('../../queries/save_session_for_admin.js');
   var db;
 
   beforeEach(function (done) {
