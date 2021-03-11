@@ -1,8 +1,8 @@
-const connect = require('../mongo/connect.js');
+const connect = require('../../connect.js');
 
 describe('deleteSessionById', function(){
     
-    var fn = require('../delete_session_by_id.js');
+    var fn = require('../../queries/delete_admin_session.js');
     var db;
     var adminSession;
     

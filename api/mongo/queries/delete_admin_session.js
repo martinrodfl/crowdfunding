@@ -1,4 +1,4 @@
-const connect = require('./mongo/connect.js')
+const connect = require('../connect.js')
 
 module.exports = async function deleteSessionById(id){
     var db = await connect();
