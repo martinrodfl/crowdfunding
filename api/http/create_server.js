@@ -16,12 +16,18 @@ module.exports = function createServer(routes) {
         body = JSON.parse(body);
         resolve(body);
       });
-    })
+    });
+  }
+
+  function usecaseNotFound(response) {
+    response.writeHead(404, {});
+    response.end('');
   }
 
   server.on('request', async function (request, response) {
     var usecase = mapUrlUsecase(request);
     var payload = await readRequestBody(request);
+    if (!usecase) return usecaseNotFound(response);
     usecase(payload)
       .then(function (payload) {
         response.writeHead(200, {});
