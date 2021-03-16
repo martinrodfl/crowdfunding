@@ -16,25 +16,12 @@ describe('saveCampaign', function () {
   });
 
   it('Campaign is added successfully', function (done) {
-    var campaignItem = Math.random();
-    fn(campaignItem).then(function (campaignItem = {id: 0}){
+    var campaignItem = {id: Math.random()};
+    fn(campaignItem).then(function () {
       expect(db.collection('campaignsCollection').find({
-          id: campaignItem.id
+        id: campaignItem.id
       }));
+      done(); 
     });
-    done();
   });
-
-  it('Campaign invalid', function (done) {
-    fn()
-    .then(function(campaignItem = {id: 0}){
-      expect(db.collection('campaignsCollection').findOne({ id: campaignItem.id }))
-      //  .toBe(undefined))
-    })
-    // .then( function() { return db.collection('campaignsCollection')} )
-    done();
-  });
-//   it('Campaign is valid but was not added successfully to the collection', function (done) {
-    
-//   });
 });
