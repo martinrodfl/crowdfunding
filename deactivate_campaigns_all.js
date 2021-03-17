@@ -3,7 +3,7 @@ const connect = require('./mongo/connect.js');
 
 
 var campaignsCollection = []; // llamado a la base de datos en el servidor 
-                             // para traer la coleccion de campañas actuales
+                             // para traer la coleccion de campañas actuales.
 
 function deactivateCampaign(campaignItem){
     if (campaignItem.active === true) campaignItem.active = false;
