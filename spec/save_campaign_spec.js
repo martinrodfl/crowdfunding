@@ -16,7 +16,7 @@ describe('saveCampaign', function () {
   });
 
   it('Campaign is added successfully', function (done) {
-    var campaignItem = {id: Math.random()};
+    var campaignItem = { id: Math.random() };
     fn(campaignItem).then(function () {
       expect(db.collection('campaignsCollection').find({
         id: campaignItem.id
