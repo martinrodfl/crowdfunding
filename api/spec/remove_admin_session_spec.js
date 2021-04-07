@@ -8,7 +8,9 @@ describe('removeAdminSession', function () {
     , adminSession;
 
   beforeAll(function () {
-    server = require('../server.js')();
+    server = require('../server.js')({
+      sendEmail: function () {}
+    });
     server.listen(port);
   });
 
