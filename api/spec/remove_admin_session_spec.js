@@ -1,17 +1,20 @@
-describe('removeAdminSession', function () {
+describe('/remove_admin_session', function () {
   var request = require('./support/request.js')
-    , connect = require('../mongo/connect.js')
+    , connect = require('../mongo/connect.js');
 
   var port = 23232
     , server
     , db
-    , adminSession;
+
+  var adminSession;
 
   beforeAll(function () {
-    server = require('../server.js')({
-      sendEmail: function () {}
-    });
+    server = require('../server.js')();
     server.listen(port);
+  });
+
+  afterAll(function () {
+    server.close();
   });
 
   beforeEach(function (done) {
@@ -23,10 +26,6 @@ describe('removeAdminSession', function () {
         return db.collection('adminSessions').insertOne(adminSession);
       })
       .then(done);
-  });
-
-  afterAll(function () {
-    server.close();
   });
 
   it('doesnt find admin session', function (done) {
