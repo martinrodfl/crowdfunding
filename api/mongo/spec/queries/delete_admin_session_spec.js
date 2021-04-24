@@ -1,20 +1,16 @@
 const connect = require('../../connect.js');
 
-describe('deleteSessionById', function(){
+describe('deleteSessionById', function() {
+    var fn = require('../../queries/delete_admin_session.js')
+      , db
+      , adminSession;
     
-    var fn = require('../../queries/delete_admin_session.js');
-    var db;
-    var adminSession;
-    
-    beforeEach(function(done){
-        
+    beforeEach(function(done) {
         connect()
-        .then(function (database){ db = database})
-        .then(function(){
-            return db.dropDatabase();
-        })
-        .then(function (){
-            adminSession = { mail: 'carlos@mail.com'};
+        .then(function (_) { db = _; })
+        .then(function() { return db.dropDatabase(); })
+        .then(function () {
+            adminSession = { mail: 'carlos@mail.com' };
             return db.collection('adminSessions').insertOne(adminSession)
         })
         .then(done)

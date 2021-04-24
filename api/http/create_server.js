@@ -26,14 +26,15 @@ module.exports = function createServer(routes) {
 
   server.on('request', async function (request, response) {
     var usecase = mapUrlUsecase(request);
-    var payload = await readRequestBody(request);
+    var input = await readRequestBody(request);
     if (!usecase) return usecaseNotFound(response);
-    usecase(payload)
-      .then(function (payload) {
+    usecase(input)
+      .then(function (output) {
         response.writeHead(200, {});
-        response.end(JSON.stringify(payload));
+        response.end(JSON.stringify(output));
       })
       .catch(function (errors) {
+        console.log(errors);
         response.writeHead(400, {});
         response.end(JSON.stringify(errors));
       });
