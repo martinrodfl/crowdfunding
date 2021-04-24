@@ -18,8 +18,8 @@ function layout(usecases) {
 
     template: `
       <div id="layout">
-        <p v-show="!loggedIn">Gracias por venir!</p>
-        <home-page v-show="loggedIn"></home-page>
+        <home-page></home-page>
+        <campaigns-page></campaigns-page>
       </div>
     `
   });

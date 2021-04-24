@@ -34,6 +34,7 @@ module.exports = function createServer(routes) {
         response.end(JSON.stringify(output));
       })
       .catch(function (errors) {
+        console.log(errors);
         response.writeHead(400, {});
         response.end(JSON.stringify(errors));
       });
