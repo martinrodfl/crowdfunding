@@ -1,23 +1,19 @@
 var connect = require('../../connect.js');
 
 describe('findAdminByEmail', function () {
-  var fn = require('../../queries/find_admin_by_email.js');
-  var admin;
+  var fn = require('../../queries/find_admin_by_email.js')
+  , conn
+  , admin;
 
   beforeAll(function (done) {
     connect()
-      .then(function (client) {
+      .then(function (_conn) { conn = _conn; })
+      .then(function () { return conn.dropDatabase(); })
+      .then(function () {
         admin = { email: Math.random().toString() };
-        return client.collection('admins').insertOne(admin);
+        return conn.collection('admins').insertOne(admin);
       })
       .then(done);
-  });
-
-  afterAll(function (done) {
-    connect().then(function (client) {
-      client.dropDatabase();
-      done();
-    });
   });
 
   it('doesnt find admin, email is undefined', function (done) {
