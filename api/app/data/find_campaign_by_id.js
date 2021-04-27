@@ -1,7 +1,11 @@
 module.exports = function findCampaignById(deps){
   return async function (payload){
-    var adminSession = await deps.findAdminSession(payload.adminSessionId);
-    if (!adminSession) return Promise.reject({ adminSession: 'NOT_FOUND' });
+    var campaign = await deps.findCampaignById({
+      campaignId: payload.campaignId,
+      adminId: payload.adminSession.adminId
+    });
+    if (!campaign) return Promise.reject({ campaign: 'NOT_FOUND' });
+    payload.campaign = campaign;
     return Promise.resolve(payload)
   }
 }
