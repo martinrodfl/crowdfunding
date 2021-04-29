@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     concat: {
       spec: {
         src: [
-          '../app/actions/**.js',
+          '../app/usecases/**.js',
           '../app/dom/**.js',
           '../app/api/**.js',
           '../app/spec/**/**.js',
@@ -15,7 +15,7 @@ module.exports = function (grunt) {
       },
       prod: {
         src: [
-          '../app/actions/**.js',
+          '../app/usecases/**.js',
           '../app/dom/**.js',
           '../app/api/**.js',
           '../api/**.js',

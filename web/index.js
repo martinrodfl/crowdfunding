@@ -1,3 +1,19 @@
+function getCampaigns(deps) {
+  return function (input) {
+    return Promise.resolve(input)
+      .then(loadCurrentSession(deps))
+      .then(callGetCampaignsApi(deps))
+      .then(sendCampaignsEvent(deps));
+  };
+}
+function removeAdminSession(deps) {
+  return function (payload) {
+    Promise.resolve(payload)
+      .then(loadCurrentSession(deps))
+      .then(callRemoveAdminSessionApi(deps))
+      .then(sendAdminSessionRemovedEvent(deps));
+  };
+}
 function loadCurrentSession(deps) {
   return function (payload) {
     payload.currentSession = deps.getCurrentSession();
@@ -20,6 +36,14 @@ function callRemoveAdminSessionApi(deps) {
         return payload;
       });
   };
+}
+function callRemoveCampaignApi(deps){
+  return function (input){
+    return deps.removeCampaignApi(input.currentSession)
+    .then(function(){
+      return input;
+    })
+  }
 }
 function makeApiRequest(config) {
   return new Promise(function (resolve) {
