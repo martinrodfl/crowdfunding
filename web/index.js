@@ -14,6 +14,14 @@ function removeAdminSession(deps) {
       .then(sendAdminSessionRemovedEvent(deps));
   };
 }
+function removeCampaign(deps) {
+  return function (payload) {
+    Promise.resolve(payload)
+      .then(loadCurrentSession(deps))
+      .then(callRemoveCampaignApi(deps))
+      .then(sendRemoveCampaignEvent(deps));
+  };
+}
 function loadCurrentSession(deps) {
   return function (payload) {
     payload.currentSession = deps.getCurrentSession();
@@ -39,7 +47,10 @@ function callRemoveAdminSessionApi(deps) {
 }
 function callRemoveCampaignApi(deps){
   return function (input){
-    return deps.removeCampaignApi(input.currentSession)
+    return deps.removeCampaignApi({
+      adminSessionId: input.currentSession,
+      campaignId: input.campaignId
+    })
     .then(function(){
       return input;
     })
@@ -55,6 +66,14 @@ function makeApiRequest(config) {
       .then(function (response) { return response.json(); })
       .then(function (json) { resolve(json); });
   });
+}
+function makeHttpRequest(input){
+  return fetch(API_URL + input.path, {
+    method : 'POST',
+    body : input.body
+  }).then(function(response) {
+    return response.json()
+  })
 }
 function getSessionFromLocalStorage() {
   return localStorage.getItem('session');

@@ -7,6 +7,7 @@ module.exports = function (grunt) {
           '../app/usecases/**.js',
           '../app/dom/**.js',
           '../app/api/**.js',
+          '../app/events/**.js',
           '../app/spec/**/**.js',
           '../api/spec/**/**.js',
           '../dom/spec/**/**.js',
