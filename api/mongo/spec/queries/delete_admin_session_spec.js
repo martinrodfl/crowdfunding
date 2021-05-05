@@ -4,7 +4,7 @@ describe('deleteSessionById', function() {
     var fn = require('../../queries/delete_admin_session.js')
       , db
       , adminSession;
-    
+
     beforeEach(function(done) {
         connect()
         .then(function (_) { db = _; })
