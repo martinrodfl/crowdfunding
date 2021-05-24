@@ -15,7 +15,6 @@ describe('setCampaignSelected', function () {
             return conn.collection('admins').insertOne(admin);
           })
           .then(function () {
-            console.log(admin);
             campaign = {
                 adminId: admin._id,
                 name: Math.random(),
@@ -29,14 +28,12 @@ describe('setCampaignSelected', function () {
 
     it('select campaign', function(done){
         var input = {
-            campaignId:campaign._id.toString(),
-            adminId: admin._id.toString()
+            adminId: admin._id.toString(),
+            campaignId:campaign._id.toString()
         }
         fn(input).then(function(result){
             expect(result.value).toEqual(campaign);
-            console.log(result);
             conn.collection('campaigns').findOne().then(function(dbCampaign){
-                console.log(dbCampaign);
                 expect(dbCampaign.active).toBe(true);
                 done();
             });
