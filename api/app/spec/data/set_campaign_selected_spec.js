@@ -1,35 +1,40 @@
-describe('setCampaignSelected',function(){
-    var fn = require('../../data/set_campaign_selected.js')
-    var doubleSuccessInput;
-    var doubleSuccessOutput;
+describe('setCampaignSelected', function () {
+  var fn = require('../../data/set_campaign_selected.js')
+  var doubleSuccessInput;
+  var doubleSuccessUnselectedInput;
 
-    function setCampaignSelectedDoubleSuccess(input) {
-        doubleSuccessInput = input;
-        doubleSuccessOutput = doubleSuccessInput;
-        return Promise.resolve(doubleSuccessOutput);
-      };
+  function setCampaignSelectedDoubleSuccess(input) {
+    doubleSuccessInput = input;
+    return Promise.resolve();
+  };
 
-    it('sets campaign selected active',function(done){
-        var deps = { setCampaignSelected: setCampaignSelectedDoubleSuccess };
-        
-        var input = {
-            campaignId: Math.random(),
-            adminSession: {adminId: Math.random()},
-            active: false
-        }
-        var fnLista = fn(deps);
-        fnLista(input).then(function (output){
-            expect(output).toBe(input);
-            expect(doubleSuccessInput).toEqual({
-                campaignId: input.campaignId,
-                adminSession: input.adminSession.adminId,
-                active: !input.active
-              });
-            done();
-        }) 
+  function setCampaignUnselectedDoubleSuccess(input) {
+    doubleSuccessUnselectedInput = input;
+    return Promise.resolve();
+  };
+
+  it('sets campaign selected active', function (done) {
+    var deps = {
+      setCampaignSelected: setCampaignSelectedDoubleSuccess,
+      setCampaignsUnselected: setCampaignUnselectedDoubleSuccess
+    };
+
+    var input = {
+      campaignId: Math.random(),
+      adminSession: { adminId: Math.random() },
+    }
+    var fnLista = fn(deps);
+    fnLista(input).then(function (output) {
+      expect(output).toBe(input);
+      expect(doubleSuccessInput).toEqual({
+        campaignId: input.campaignId,
+        adminId: input.adminSession.adminId,
+      });
+      expect(doubleSuccessUnselectedInput).toEqual({
+        campaignId: input.campaignId,
+        adminId: input.adminSession.adminId,
+      });
+      done();
     })
-
-
-
-    it('sets campaign unselected inactive')
+  })
 })
