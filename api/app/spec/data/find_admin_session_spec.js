@@ -4,11 +4,11 @@ describe('findAdminSession', function () {
   function databaseFindAdminSessionDoubleSuccess(params) {
     databaseFindAdminSessionDoubleSuccess.params = params;
     databaseFindAdminSessionDoubleSuccess.result = Math.random();
-    return databaseFindAdminSessionDoubleSuccess.result;
+    return Promise.resolve(databaseFindAdminSessionDoubleSuccess.result);
   }
 
   function databaseFindAdminSessionDoubleNull() {
-    return null;
+    return Promise.resolve(null);
   }
 
   it('doesnt find session', function (done) {
@@ -25,8 +25,10 @@ describe('findAdminSession', function () {
     var input = { adminSessionId: Math.random() };
     fn(deps)(input).then(function (output) {
       expect(output).toBe(input);
-      expect(databaseFindAdminSessionDoubleSuccess.params).toBe(input.adminSessionId);
-      expect(output.adminSession).toBe(databaseFindAdminSessionDoubleSuccess.result);
+      expect(databaseFindAdminSessionDoubleSuccess.params)
+        .toBe(input.adminSessionId);
+      expect(output.adminSession)
+        .toBe(databaseFindAdminSessionDoubleSuccess.result);
       done();
     });
   });
