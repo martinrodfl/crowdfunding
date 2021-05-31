@@ -1,6 +1,11 @@
 module.exports = function createServer(routes) {
   var server = require('http').createServer();
 
+  function log(_) {
+    if (!process.env.SHOW_LOGS) return;
+    console.log(new Date(), _);
+  }
+
   function mapUrlUsecase(request) {
     return routes[request.url];
   }
@@ -13,7 +18,8 @@ module.exports = function createServer(routes) {
       });
       request.on('end', function () {
         var body = request.body.join('');
-        body = JSON.parse(body);
+        try { body = JSON.parse(body); }
+        catch { body = {}; }
         resolve(body);
       });
     });
@@ -26,15 +32,15 @@ module.exports = function createServer(routes) {
 
   server.on('request', async function (request, response) {
     var usecase = mapUrlUsecase(request);
-    var input = await readRequestBody(request);
     if (!usecase) return usecaseNotFound(response);
+    var input = await readRequestBody(request);
     usecase(input)
       .then(function (output) {
         response.writeHead(200, {});
         response.end(JSON.stringify(output));
       })
       .catch(function (errors) {
-        console.log(errors);
+        log(errors);
         response.writeHead(400, {});
         response.end(JSON.stringify(errors));
       });

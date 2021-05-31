@@ -10,7 +10,7 @@ describe('getCampaigns', function () {
   function databaseFindAdminSessionDoubleNull() {
     return null;
   }
-  
+
   function findCampaignsByAdminIdDouble(params) {
     findCampaignsByAdminIdDouble.params = params;
     findCampaignsByAdminIdDouble.result = Math.random();

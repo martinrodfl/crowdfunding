@@ -28,8 +28,15 @@ describe('findAdminSession', function () {
     var input = { adminSessionId: Math.random() };
     fn(deps)(input).then(function (output) {
       expect(output).toBe(input);
+<<<<<<< HEAD
       expect(databaseFindAdminSessionDoubleSuccess.params).toBe(input.adminSessionId);//consultamos al doble como fue llamado
       expect(output.adminSession).toBe(databaseFindAdminSessionDoubleSuccess.result);
+=======
+      expect(databaseFindAdminSessionDoubleSuccess.params)
+        .toBe(input.adminSessionId);
+      expect(output.adminSession)
+        .toBe(databaseFindAdminSessionDoubleSuccess.result);
+>>>>>>> master
       done();
     });
   });
