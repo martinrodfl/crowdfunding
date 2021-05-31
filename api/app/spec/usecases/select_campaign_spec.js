@@ -77,12 +77,11 @@ describe('selectCampaign', function () {
             setCampaignSelected: setCampaignSelectedDoubleSuccess,
             setCampaignsUnselected: setCampaignsUnselectedDoubleSuccess
         }
-
+        
         var input = {
             adminSessionId: Math.random(),
             campaignId: Math.random(),
         }
-        
         fnLista = fn(deps);
         fnLista(input).then(function (output) {
             expect(findAdminSessionDoubleSuccess.params).toBe(input.adminSessionId);
