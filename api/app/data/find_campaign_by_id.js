@@ -10,6 +10,7 @@ module.exports = function findCampaignById(deps) {
         });
       }
       input.campaign = campaign;
+      console.log('input', input)
       return Promise.resolve(input);
     })
   };
