@@ -35,8 +35,7 @@ describe('/add_campaign', function () {
     })
       .then(function (response) {
         expect(response.statusCode).toBe(400);
-        expect(JSON.parse(response.body))
-          .toEqual({ adminSession: 'NOT_FOUND' });
+        expect(JSON.parse(response.body)).toEqual({ adminSession: 'NOT_FOUND' });
         done();
       });
   });

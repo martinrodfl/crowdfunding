@@ -18,10 +18,9 @@ describe('findCampaignById', function () {
         var input = {
             campaignId: Math.random(),
             adminSession: {adminId: Math.random()}
-        }
+            }
 
-        var fnLista = fn(deps);
-        fnLista(input).then(function (output) {
+        fn(deps)(input).then(function (output) {
             expect(output).toBe(input);
             expect(doubleSuccessInput).toEqual({
                 campaignId: input.campaignId,
@@ -30,8 +29,6 @@ describe('findCampaignById', function () {
             expect(doubleSuccessOutput).toEqual(output.campaign)
             done();
         });
-
-
     })
 
     it('calls dep and return error', function (done) {
@@ -39,13 +36,11 @@ describe('findCampaignById', function () {
         var input = {
             campaignId: Math.random(),
             adminSession: {adminId: Math.random()}
-        }
-        var fnLista = fn(deps);
-        fnLista(input).catch(function (output) {
+            }
+
+        fn(deps)(input).catch(function (output) {
             expect(output).toEqual({ campaign: 'NOT_FOUND' })
             done();
-
         })
-
     })
 });

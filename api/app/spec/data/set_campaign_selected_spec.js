@@ -26,8 +26,7 @@ describe('setCampaignSelected', function () {
       adminSession: { adminId: Math.random() },
     }
 
-    var fnLista = fn(deps);
-    fnLista(input).then(function (output) {
+    fn(deps)(input).then(function (output) {
       expect(output).toBe(input);
       expect(doubleSuccessInput).toEqual({
         campaignId: input.campaignId,
@@ -38,7 +37,6 @@ describe('setCampaignSelected', function () {
         adminId: input.adminSession.adminId,
       });
       done();
-
     })
   })
 })

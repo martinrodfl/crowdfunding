@@ -6,7 +6,7 @@ describe('setCampaignsUnselected', function () {
 
   , conn
   , admin
-  , campaign;
+  , campaigns;
 
   beforeEach(function (done) {
     connect()
@@ -63,7 +63,6 @@ describe('setCampaignsUnselected', function () {
           expect(dbcampaigns[2].active).toEqual(false);
           expect(dbcampaigns[3].active).toEqual(true);
           done();
-
         });
     })
   });

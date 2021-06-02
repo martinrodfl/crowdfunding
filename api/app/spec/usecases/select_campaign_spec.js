@@ -7,7 +7,7 @@ describe('selectCampaign', function () {
 
     var doubleSuccessInput;
     var doubleSuccessUnselectedInput;
-    
+
     function findAdminSessionDoubleSuccess(params) {
         findAdminSessionDoubleSuccess.params = params;
         findAdminSessionDoubleSuccess.result = { adminId: Math.random() };
@@ -20,7 +20,7 @@ describe('selectCampaign', function () {
 
     function findCampaignByIdDoubleSuccess(input) {
         doubleSuccessCampaignByIdInput = input;
-        doubleSuccessCampaignByIdOutput = { campaign: Math.random() };
+        doubleSuccessCampaignByIdOutput = { _id: Math.random() };
         return Promise.resolve(doubleSuccessCampaignByIdOutput)
     }
 
@@ -44,8 +44,7 @@ describe('selectCampaign', function () {
         var deps = { findAdminSession: findAdminSessionDoubleNull };
         var input = {};
 
-        fnLista = fn(deps);
-        fnLista(input).catch(function (output) {
+        fn(deps)(input).catch(function (output) {
             expect(output).toEqual({ adminSession: 'NOT_FOUND' });
             done();
         })
@@ -57,12 +56,11 @@ describe('selectCampaign', function () {
         var deps = {
             findCampaignById: findCampaignByIdDoubleNull,
             findAdminSession: findAdminSessionDoubleSuccess
-        }
+          }
 
-        var input = {adminSessionId: Math.random() };
+        var input = { adminSessionId: Math.random() };
 
-        fnLista = fn(deps);
-        fnLista(input).catch(function (output) {
+        fn(deps)(input).catch(function (output) {
             expect(findAdminSessionDoubleSuccess.params).toEqual(input.adminSessionId);
             expect(output).toEqual({ campaign: 'NOT_FOUND' });
             done();
@@ -76,24 +74,24 @@ describe('selectCampaign', function () {
             findCampaignById: findCampaignByIdDoubleSuccess,
             setCampaignSelected: setCampaignSelectedDoubleSuccess,
             setCampaignsUnselected: setCampaignsUnselectedDoubleSuccess
-        }
-        
+          }
+
         var input = {
             adminSessionId: Math.random(),
             campaignId: Math.random(),
-        }
-        fnLista = fn(deps);
-        fnLista(input).then(function (output) {
+          }
+
+        fn(deps)(input).then(function (output) {
             expect(findAdminSessionDoubleSuccess.params).toBe(input.adminSessionId);
             expect(doubleSuccessCampaignByIdInput).toEqual({
                 campaignId: input.campaignId,
                 adminId: findAdminSessionDoubleSuccess.result.adminId
-                })
+              })
             expect(doubleSuccessInput).toEqual({
                 campaignId: input.campaignId,
                 adminId: findAdminSessionDoubleSuccess.result.adminId
-                })
-            expect(output.campaign).toEqual({campaign: doubleSuccessCampaignByIdOutput.campaign })
+              })
+            expect(output).toEqual({ campaign: doubleSuccessCampaignByIdOutput })
             done();
         })
     })

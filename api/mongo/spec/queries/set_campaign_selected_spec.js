@@ -31,7 +31,7 @@ describe('setCampaignSelected', function () {
     var input = {
       adminId: admin._id.toString(),
       campaignId: campaign._id.toString(),
-    }
+      }
 
     fn(input).then(function(result){
       expect(result).toEqual(campaign);
