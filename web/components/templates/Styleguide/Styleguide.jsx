@@ -2,6 +2,7 @@ import React from 'react';
 
 /* ATOMS */
 import Button from '../../atoms/Button/Button.jsx';
+import HamburgerMenuButton from '../../atoms/HamburgerMenuButton/HamburgerMenuButton.jsx';
 
 /* MOLECULES */
 
@@ -17,6 +18,10 @@ var components = [
   {
     name: 'Button',
     elem: <Button onClick={console.log} text="Button" />
+  },
+  {
+    name: 'HamburgerMenuButton',
+    elem: <HamburgerMenuButton/>
   },
 ];
 
