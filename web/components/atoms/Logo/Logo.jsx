@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-class PageTitle extends Component {
-    state = {  } 
-    render() { 
-        return (
-            <div  className="logo">
-                <p className='text'>{this.props.text}</p>
-            </div>
-        );
-    }
+class Logo extends React.Component {
+  render() {
+    return (
+      <div className="logo">
+        <p>{this.props.text}</p>
+      </div>
+    );
+  }
 }
- 
-export default PageTitle;
+
+export default Logo;

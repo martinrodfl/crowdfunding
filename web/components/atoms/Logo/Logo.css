@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.text {
+div.logo p {
     width: 175px;
     height: 29px;
     font-family: 'Roboto';
