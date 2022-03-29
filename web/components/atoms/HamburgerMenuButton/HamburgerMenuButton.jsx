@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class HamburgerMenuButton extends Component {
-    render() {
-    return (
-      <>
-        <button
-          className="hamburgerMenuButton">
-          </button>
-      </>
-    );
+class HamburgerMenuButton extends React.Component {
+  render() {
+    return <button className="hamburgerMenuButton"></button>;
   }
 }
 
