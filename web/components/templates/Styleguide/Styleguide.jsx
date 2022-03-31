@@ -2,7 +2,7 @@ import React from 'react';
 
 /* ATOMS */
 import Button from '../../atoms/Button/Button.jsx';
-
+import Logo from '../../atoms/Logo/Logo.jsx';
 /* MOLECULES */
 
 /* ORGANISMS */
@@ -18,6 +18,10 @@ var components = [
     name: 'Button',
     elem: <Button onClick={console.log} text="Button" />
   },
+  {
+    name: 'Logo',
+    elem: <Logo text='LOGO/NOMBRE'/>,
+}
 ];
 
 
